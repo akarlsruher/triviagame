@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>TRIVIA GAME</h1>
+	<div id="mainArea">
+		<div id="start">START</div>
+		<div id="done">DONE</div>
+		<div id="number"></div>
+	</div>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.js"></script>
+	<script type="text/javascript">
+
+	var number = 120;
+	var questions ={
+		q:["1) Who plays guitar for Led Zeppelin?",
+			"2) Who plays guitar for The Who?", 
+			"3) What guitar did Jimi Hendrix most often play?",
+			"4) Randy Rhodes played guitar for which famous frontman?",
+			"5) Angus Young is the lead guitar player for which band?",
+			"6) Who sold their soul to the devil at the crossroads in excahnge for their guitar playing prowess?",
+			"7) Who is considered to be the father of the electric guitar?",
+			"8) What Psychadelic rock trio did Eric Clapton play with?",
+			"9) Who played guitar in Queen?",
+			"10) How many strings does a guitar have?",
+			"11) Which famous Texas bluesman died in a helicopter crash?",
+			"12) Which guiar player lost three fingertips on his left hand one day before quitting his job at a Sheffield steel mill?"],
+
+		c:[["A) Robert Plant", "B) John Paul Jones","C) Michael Scott","D) Jimmy Page"],
+		  ["A) Keith Moon","B) Pete Townshend","C) Robert Daltrey","D) Ozzy Osbourne"],
+		  ["A) Gibson SG","B)Fender Stratocaster","C) Gibson Les Paul","D) Epiphone Dot"],
+		  ["A) Dio", "B) James Hetfield","C) Ozzy","D) Leo Fender"],
+		  ["A) Back in Black","B) Iron Maiden", "C) AC/DC","D) Black Flag"],
+		  ["A) Robert Johnson", "B) Kirk Hammett", "C) Carlos Santana", "Tony Iommi"],
+		  ["A) Jimi Hendrix", "B) Django Reinhardt", "C) B.B. King", "D) Les Paul"],
+		  ["A) Rush", "B) Cream", "C) The Ramones", "D) CCR"],
+		  ["A) Eric Clapton", "B) Greg Ginn", "C) Brian May", "D) Buddy Guy"],
+		  ["A) 6", "B) 5", "C) 7", "D) 4"],
+		  ["A) Buddy Guy", "B) Stevie Ray Vaughn", "C) B.B. King", "D) Buddy Holly"],
+		  ["A) Jeff Bagwell", "B) Alex Turner", "C) Rob Halford", "D) Tony Iommi"]],
+
+		a:["D) Jimmy Page",
+		"B) Pete Townshend",
+		"B) Fender Stratocaster",
+		"C) Ozzy",
+		"C) AC/DC",
+		"A) Robert Johnson",
+		"D) Les Paul",
+		"B) Cream",
+		"C) Brian May",
+		"A) 6",
+		"B) Stevie Ray Vaughn",
+		"D) Tony Iommi",
+		],
+	};
+
+
+//setting a timer
+	function run(){
+      counter = setInterval(increment, 1000);
+    };
+//set increment for times
+    function increment(){
+    	number --;
+    	$("#number").html(number);
+    	if (number === 0 ){
+    		clearInterval(counter);
+    		alert("Time Up!");
+    		compare();
+    	}
+    };
+
+    function compare(){
+    	for(i=0;i<questions.q.length;i++){
+    		var myForm = $("choices"+i);
+    		var selectedRadio = myForm["choices"+i];
+
+    		console.log(selectedRadio.parentElement.text());
+    	}
+    };
+//function that creates 4 radio buttons within the "choices" forms that are created in the click function.
+    function addButtons(num){
+		
+			$("#choices"+num).append("<span>"+questions.c[num][0]+"</span>"+"<input name='button"+num+"' type='radio'>");
+			$("#choices"+num).append("<span>"+questions.c[num][1]+"</span>"+"<input name='button"+num+"' type='radio'>");
+			$("#choices"+num).append("<span>"+questions.c[num][2]+"</span>"+"<input name='button"+num+"' type='radio'>");
+			$("#choices"+num).append("<span>"+questions.c[num][3]+"</span>"+"<input name='button"+num+"' type='radio'>");
+		
+    };
+//on click begin timer,	
+    $("#start").click (function(){
+    	run();
+//loop that runs through the questions, creates a div for each and appends it to the mainArea
+//also creates a blank form for radio buttons to appear in.
+
+    	for(i=0;i<questions.q.length;i++) {
+    		
+    		
+    		$("#mainArea").append("<div class='question'>"+questions.q[i]+"</div>");
+
+			// add a form to the main area 
+
+			$("#mainArea").append("<form id='choices"+i+"'></form>");
+			
+			addButtons(i);
+			
+			
+		}
+		
+
+
+
+    });
+    
+    
+
+    $("#done").click (function(){
+    	clearInterval(counter);
+    	alert("Finished!");
+    	compare();
+    });
+
+   
+
+    
+
+
+
+
+	</script>
+</body>
+</html>
